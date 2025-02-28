@@ -1,0 +1,156 @@
+/* === Centered Form Container === */
+.auth-container {
+    max-width: 300px;
+    margin: 50px auto 10px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    background: #f8f9fa;
+    color: #333;
+}
+
+/* Form Styling */
+.auth-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-container h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #222;
+}
+
+.auth-container label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.auth-container input {
+    margin-bottom: 10px;
+}
+
+/* Centering the Signup/Login Links */
+.auth-container p {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.auth-container p a {
+    color: #007bff;
+}
+
+/*contact css */
+/* === Contact Form Container === */
+.contact-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.contact-form-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* === Contact Form Styling === */
+.contact-form {
+    width: 400px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* === Form Labels === */
+.contact-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* === Form Inputs & Textarea === */
+.contact-form input,
+.contact-form textarea {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #666;
+    border-radius: 5px;
+    width: 100%;
+    background: #fff;
+    color: #000;
+}
+
+/* === Submit Button === */
+.contact-form button {
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+.contact-form button:hover {
+    background: #0056b3;
+}
+
+/* === Alert Box Styling === */
+.alert {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* Success Message (Green) */
+.alert-success {
+    background-color: #d4edda !important;
+    color: #155724 !important;
+    border: 1px solid #c3e6cb !important;
+}
+
+/* Error Message (Red) */
+.alert-danger {
+    background-color: #f8d7da !important;
+    color: #721c24 !important;
+    border: 1px solid #f5c6cb !important;
+}
+
+/* Warning Message (Yellow) */
+.alert-warning {
+    background-color: #fff3cd !important;
+    color: #856404 !important;
+    border: 1px solid #ffeeba !important;
+}
+
+/* Info Message (Blue) */
+.alert-info {
+    background-color: #d1ecf1 !important;
+    color: #0c5460 !important;
+    border: 1px solid #bee5eb !important;
+}
+
+/* === Close Button Styling (Fixed) === */
+.alert .btn-close {
+    background: none !important;
+    border: none !important;
+    font-size: 18px !important;
+    cursor: pointer !important;
+    color: #333 !important;  /* Dark color for visibility */
+    opacity: 0.9 !important;
+    transition: 0.3s ease-in-out !important;
+}
+
+/* Close Button Hover Effect */
+.alert .btn-close:hover {
+    color: #ff0000 !important;  /* Turns red on hover */
+    opacity: 1 !important;
+}

@@ -1,0 +1,35 @@
+/* === Center Content & Improve Layout === */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.col.my-4 {
+    width: 100%;
+    max-width: 600px; /* Limits form width for better readability */
+}
+
+/* Ensure items remain centered */
+#item {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Make "Place Order" button full width on mobile, centered on large screens */
+.btn-place-order {
+    width: 100%;
+    max-width: 400px;
+    display: block;
+    margin: 20px auto;
+}
+
+/* Adjust for larger screens */
+@media (min-width: 992px) {
+    .container {
+        max-width: 800px; /* Keep everything centered */
+        margin: 0 auto;
+    }
+}

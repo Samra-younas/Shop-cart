@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Checkout{% endblock title %}
+
+{% block content %}
+<h1>Here the detail of your selected items </h1>
+{% endblock content %}
+
+{% block body %}
+<section id="portfolio" class="portfolio section">
+    <div class="container section-title" data-aos="fade-up">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            <strong>{{ message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+        </div>
+        {% endfor %}
+
+        <div class="section-title">
+            <h2>Welcome to Shop</h2>
+            <p><span class="description-title">Checkout Page</span></p>
+        </div>
+
+        <div class="container">
+            <div class="col my-4">
+                <h2>Step 1 - Review Your Cart Items</h2>
+                <div class="my-4">
+                    <ul class="list-group" id="item"></ul>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mt-3">
+                            <li class="breadcrumb-item active" aria-current="page">
+                                Your Cart Total Is <b>Rs. <span id="totalprice"></span></b>
+                                <br>Enter your details below & place your order. Thank you for shopping with us!
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="col my-4">
+                <h2>Step 2 - Enter Address & Other Details:</h2>
+                <form method="post" action="{% url 'checkout' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="itemsJson" id="itemsJson">
+                    <input type="hidden" id="amt" name="amt">
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control mt-3" id="name" name="name" placeholder="Name" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control mt-3" id="email" name="email" value="{{ user.email }}" placeholder="Email" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="address1">Address</label>
+                            <input type="text" class="form-control mt-3" id="address1" name="address1" placeholder="1234 Main Street" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="state">City</label>
+                            <input type="text" class="form-control mt-3" id="state" name="state" placeholder="Enter City" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="phone">Phone</label>
+                            <input type="number" class="form-control mt-3" id="phone" name="phone" placeholder="Phone Number" required>
+                        </div>
+                    </div>
+
+                    <br>
+                    <button id="btn" type="submit" class="btn btn-success btn-sm btn-block col-md-4">Place Order</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        //   cart is cleared after order placement
+        if (sessionStorage.getItem("orderPlaced")) {
+            localStorage.removeItem("cart"); //  Clear cart data
+            sessionStorage.removeItem("orderPlaced"); 
+        }
+
+        let cart = JSON.parse(localStorage.getItem("cart")) || {};
+        let totalPrice = 0;
+        let itemsList = document.getElementById("item");
+
+        if (Object.keys(cart).length === 0) {
+            itemsList.innerHTML = `<p>Your cart is empty. Please add items before checking out!</p>`;
+            document.getElementById("totalprice").innerText = "0";
+        } else {
+            let cartContent = "";
+            for (let item in cart) {
+                let itemData = cart[item];
+                let name = itemData.name;
+                let qty = itemData.quantity;
+                let itemPrice = itemData.price;
+                totalPrice += qty * itemPrice;
+
+                cartContent += `
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        ${name} 
+                        <div><b>Price: Rs. ${itemPrice}</b></div>
+                        <span class="badge badge-primary badge-pill">${qty}</span>
+                    </li>`;
+            }
+            itemsList.innerHTML = cartContent;
+            document.getElementById("totalprice").innerText = totalPrice;
+        }
+
+        document.getElementById("itemsJson").value = JSON.stringify(cart);
+        document.getElementById("amt").value = totalPrice;
+    });
+
+    // cart is cleared after order placement
+    document.getElementById("order-btn").addEventListener("click", function () {
+        localStorage.removeItem("cart"); // Clear cart from storage
+        sessionStorage.setItem("orderPlaced", "true"); //  Flag that order was placed
+    });
+</script>
+
+{% endblock body %}
